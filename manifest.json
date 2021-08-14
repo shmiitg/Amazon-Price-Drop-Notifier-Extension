@@ -1,0 +1,31 @@
+{
+    "manifest_version":2,
+    "name":"Amazon Price Tracker and Scraper",
+    "version":"2.0",
+    "web_accessible_resources":[
+        "goku.jpg"
+    ],
+    "background":{
+        "scripts":[
+            "packages/jquery-3.6.0.js",
+            "packages/firebase-app.js",
+            "packages/firebase-auth.js",
+            "background.js"
+        ]
+    },
+    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+    "permissions":[
+        "tabs",
+        "activeTab"
+    ],
+    "browser_action":{
+        "default_icon":"goku.jpg",
+        "default_popup":"popup.html"
+    },
+    "content_scripts":[
+        {   
+            "matches":["<all_urls>"],
+            "js":["packages/jquery.min.js","content.js"]
+        }
+    ]
+}

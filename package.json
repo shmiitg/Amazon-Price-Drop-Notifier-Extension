@@ -1,0 +1,17 @@
+{
+  "name": "amazon-extension",
+  "version": "1.0.0",
+  "description": "chrome extension",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon -e js"
+  },
+  "author": "shubham",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.4.6",
+    "express": "^4.17.1",
+    "nightmare": "^3.0.2"
+  }
+}
