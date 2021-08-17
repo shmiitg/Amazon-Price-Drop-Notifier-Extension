@@ -4,10 +4,10 @@ This is a chrome extension that notifies the user by sending an email when the p
 
 # What info user has to feed ?
 
-- The Product Url
+- The Product Url which they want to get informed about
 - The Price below which they want to get informed
 
-# What is used in this project ?
+# What I used in this project ?
 
 - Sendgrid : for sending email
 - Nightmare : for finding the price id in amazon website
@@ -15,7 +15,7 @@ This is a chrome extension that notifies the user by sending an email when the p
 
 # What login/signup info is required ?
 
-- User has to feed their email address(should a legit one as emails will be sent to that address) and password
+- User has to feed their email address(should be a legit one as emails will be sent to that address) and password
 
 # Will it work for any other Ecommerce Website ?
 
