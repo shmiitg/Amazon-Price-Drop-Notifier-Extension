@@ -1,21 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const Nightmare = require('nightmare'); //nightmare will help to find the url and price value in the url block
 const nightmare = Nightmare();
 const port = process.env.port || 3000;
-const path = require('path');
-const fs = require('fs');
 const sgMail = require('@sendgrid/mail');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const filePath = path.join(__dirname + '/apikey.txt');
-let SENDGRID_API_KEY;
-fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) throw err;
-    SENDGRID_API_KEY = data.toString();
-    sgMail.setApiKey(SENDGRID_API_KEY);
-});
+let SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 function sendEmail(userEmail, url, price) {
     let message = {
@@ -28,7 +22,7 @@ function sendEmail(userEmail, url, price) {
     return sgMail.send(message);
 }
 
-async function checkPrice(url, price, userEmail) {
+const checkPrice = async (url, price, userEmail) => {
     try {
         let priceInString = await nightmare
             .goto(url)
@@ -42,6 +36,9 @@ async function checkPrice(url, price, userEmail) {
             await sendEmail(userEmail, url, price);
             console.log('Email has been sent');
         }
+        else {
+            console.log('Price is still higher');
+        }
     } catch (err) {
         console.log(err);
     }
@@ -52,4 +49,4 @@ app.post('/products', (req, res) => {
     checkPrice(req.body.prodUrl, req.body.price, req.body.email);
 });
 
-app.listen(port, () => console.log(`listening at port ${port}`));
+app.listen(port, () => console.log(`Server listening on port ${port}`));
